@@ -11,13 +11,14 @@ jobs:
   onMasterMerge:
     docker:
       - image: google/cloud-sdk:alpine
+    context: gcpCicdServiceAccountCredentialsJson
     steps:
       - checkout
       - setup_remote_docker:
           docker_layer_caching: true
       - run:
           command: |
-          echo 'export gcpCicdServiceAccountCredentialsJson="$gcpCicdServiceAccountCredentialsJson"' >> $BASH_ENV
+          echo "$gcpCicdServiceAccountCredentialsJson" >> $BASH_ENV
           ./heartpoints.sh onMasterMerge
       
 workflows:
