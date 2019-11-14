@@ -36,7 +36,7 @@ buildCicdDockerImage:
   stage: build
   image: docker:stable
   only:
-  - gitlab
+  - master
   services:
   - docker:dind
   script:
@@ -47,7 +47,7 @@ buildCicdDockerImage:
 deploy:
   stage: deploy
   only:
-  - gitlab
+  - master
   image: registry.gitlab.com/bob-bins/heartpoints.org/cicd:1.0.0
   script:
   - export gcpCicdServiceAccountCredentialsJson="$gcpCicdServiceAccountCredentialsJson"
